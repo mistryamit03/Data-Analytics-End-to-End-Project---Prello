@@ -1,0 +1,30 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: google_drive
+    tables:
+      - name: average_salary_by_municipality
+        identifier: average_salary_by_municipality_average_salary_by_municipality
+        description: "A description of what this model represents and the transformations applied, if any."
+        columns:
+          - name: country_code
+            description: "The ISO country code representing the country."
+            tests:
+              - not_null
+
+
+          - name: year
+            description: "The year in which the data was collected."
+            tests:
+              - not_null
+
+          - name: municipality_code
+            description: "A unique code identifying the municipality within the country."
+            tests:
+              - not_null
+
+          - name: avg_net_salary
+            description: "The average net salary calculated for each municipality."
+            tests:
+              - not_null
