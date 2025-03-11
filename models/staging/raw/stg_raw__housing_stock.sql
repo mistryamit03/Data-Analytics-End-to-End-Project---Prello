@@ -10,7 +10,7 @@ renamed as (
 
     select
         municipality_code,
-        year,
+        PARSE_DATE('%Y', CAST(year AS STRING)) as year_date,
         nb_principal_home,
         nb_second_home,
         nb_vacants_housing,
