@@ -9,7 +9,10 @@ source as (
 renamed as (
 
     select
-        poi,
+        case 
+        when poi = '1' then 'Unesco' 
+        when poi = '2' then 'Monument_historique' 
+        else poi end as poi, 
         name,
         latitude,
         longitude,
