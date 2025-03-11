@@ -6,7 +6,6 @@ select
     a.department_code as department_code,
     a.epci_code as epci_code,
     a.country_code as country_code,
-    a.department_code as department_code,
     case when b.intensite_tension_immo is Null then 0 else b.intensite_tension_immo end as intensite_tension_immo, 
     case when b.rental_max_apartment is Null then 0 else b.rental_max_apartment end as rental_max_apartment,
     case when b.rental_med_house is Null then 0 else b.rental_med_house end as rental_med_house,
