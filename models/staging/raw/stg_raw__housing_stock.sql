@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        int_64_field_0,
         municipality_code,
         PARSE_DATE('%Y', CAST(year AS STRING)) as year_date,
         nb_principal_home,
