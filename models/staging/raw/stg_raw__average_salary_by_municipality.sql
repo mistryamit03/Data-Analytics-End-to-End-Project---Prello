@@ -11,7 +11,7 @@ renamed as (
     select
         municipality_code,
         avg_net_salary,
-        year,
+        PARSE_DATE('%Y', CAST(year AS STRING)) as year_date,
         country_code
 
     from source
