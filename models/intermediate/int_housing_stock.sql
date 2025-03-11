@@ -1,6 +1,6 @@
 SELECT
     m.municipality_code,
-    m.year,
+    m.year_date,
     m.nb_principal_home,
     m.nb_second_home,
     m.nb_vacants_housing,
@@ -13,7 +13,7 @@ SELECT
 FROM {{ref("stg_raw__housing_stock")}} AS m
 group by 
     m.municipality_code,
-    m.year,
+    m.year_date,
     m.nb_principal_home,
     m.nb_second_home,
     m.nb_vacants_housing,
