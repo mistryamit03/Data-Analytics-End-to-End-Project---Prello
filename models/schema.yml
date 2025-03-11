@@ -5,15 +5,14 @@ sources:
     schema: google_drive
     tables:
       - name: average_salary_by_municipality
-        identifier: average_salary_by_municipality_average_salary_by_municipality
+        identifier: average_salary_by_municipality
         description: "A description of what this model represents and the transformations applied, if any."
         columns:
           - name: country_code
             description: "The ISO country code representing the country."
             tests:
               - not_null
-
-
+            
           - name: year
             description: "The year in which the data was collected."
             tests:
@@ -26,5 +25,191 @@ sources:
 
           - name: avg_net_salary
             description: "The average net salary calculated for each municipality."
+            tests:
+              - not_null
+
+      - name: real_estate_info_by_municipality
+        identifier: real_estate_info_by_municipality
+        description: "Real estate price information at the municipality level."
+        columns:
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: intersale_breche_immo
+            description: "The interval between real estate transactions in months."
+          - name: rental_max_apartment
+            description: "The maximum rental price of apartments."
+          - name: rental_max_house
+            description: "The maximum rental price of houses."
+          - name: rental_min_apartment
+            description: "The minimum rental price of apartments."
+          - name: rental_min_house
+            description: "The minimum rental price of houses."
+          - name: rental_med_apartment
+            description: "The median rental price of apartments."
+          - name: rental_med_house
+            description: "The median rental price of houses."
+          - name: rental_all
+            description: "The rental price for all types of housing."
+
+      - name: poverty_population_by_municipality
+        identifier: poverty_population_by_municipality
+        description: "Contains poverty and population data by municipality."
+        columns:
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: year
+            description: "The year in which the data was collected."
+            tests:
+              - not_null
+          - name: population
+            description: "The total population of the municipality."
+            tests:
+              - not_null
+          - name: country_code
+            description: "The ISO country code."
+            tests:
+              - not_null
+
+      - name: population_by_municipality
+        identifier: population_by_municipality
+        description: "Overall population statistics by municipality."
+        columns:
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: year
+            description: "The year in which the data was recorded."
+            tests:
+              - not_null
+          - name: population
+            description: "The total population of the municipality."
+            tests:
+              - not_null
+          - name: country_code
+            description: "The ISO country code."
+            tests:
+              - not_null
+
+      - name: notary_real_estate_sales
+        identifier: notary_real_estate_sales
+        description: "Contains real estate sales data from notary records."
+        columns:
+          - name: sales_date
+            description: "The date of the sale transaction."
+          - name: sales_amount
+            description: "The sale amount of the transaction."
+          - name: street_name
+            description: "The name of the street where the property is located."
+          - name: street_code
+            description: "A code representing the street."
+          - name: nom_commune
+            description: "The name of the municipality."
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: premise_type
+            description: "The type of property sold."
+          - name: surface
+            description: "The surface area of the sold property."
+          - name: number_of_principal_rooms
+            description: "The number of principal rooms in the property."
+          - name: latitude
+            description: "Latitude coordinate of the property location."
+          - name: longitude
+            description: "Longitude coordinate of the property location."
+
+      - name: housing_stock
+        identifier: housing_stock
+        description: "Contains data on housing stock by municipality."
+        columns:
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: year
+            description: "The year in which the data was recorded."
+            tests:
+              - not_null
+          - name: nb_principal_home
+            description: "The number of principal homes in the municipality."
+          - name: nb_second_home
+            description: "The number of second homes."
+          - name: nb_vacant_housing
+            description: "The number of vacant housing units."
+          - name: nb_tot_housing
+            description: "The total number of housing units."
+          - name: country_code
+            description: "The ISO country code."
+            tests:
+              - not_null
+
+      - name: geographical_referential
+        identifier: geographical_referential
+        description: "Geographical reference data for municipalities."
+        columns:
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: city_name
+            description: "The name of the city."
+          - name: city_name_normalized
+            description: "A normalized version of the city name."
+          - name: municipality_type
+            description: "The type of municipality."
+          - name: latitude
+            description: "Latitude coordinate of the municipality."
+          - name: longitude
+            description: "Longitude coordinate of the municipality."
+          - name: department_code
+            description: "The department code of the municipality."
+          - name: country_code
+            description: "The ISO country code."
+            tests:
+              - not_null
+          - name: department_name
+            description: "The name of the department."
+
+      - name: POI_touristic_sites_by_municipality
+        identifier: poi_touristic_sites_by_municipality
+        description: "Touristic sites available in different municipalities."
+        columns:
+          - name: poi
+            description: "The name of the touristic point of interest."
+          - name: name
+            description: "The official name of the site."
+          - name: latitude
+            description: "Latitude coordinate of the site."
+          - name: longitude
+            description: "Longitude coordinate of the site."
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
+            tests:
+              - not_null
+          - name: importance
+            description: "A measure of the site's importance."
+          - name: name_reprocessed
+            description: "A reprocessed version of the site's name."
+
+      - name: poi_tourist_establishments
+        identifier: poi_tourist_establishments
+        description: "Touristic establishments such as hotels and restaurants."
+        columns:
+          - name: poi
+            description: "The name of the touristic point of interest."
+          - name: name
+            description: "The official name of the establishment."
+          - name: latitude
+            description: "Latitude coordinate of the establishment."
+          - name: longitude
+            description: "Longitude coordinate of the establishment."
+          - name: municipality_code
+            description: "A unique code identifying the municipality."
             tests:
               - not_null

@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('raw', 'average_salary_by_municipality') }}
+    select * from {{ source('raw', 'poverty_population_by_municipality') }}
 
 ),
 
@@ -10,8 +10,8 @@ renamed as (
 
     select
         municipality_code,
-        avg_net_salary,
         year,
+        population,
         country_code
 
     from source
