@@ -1,5 +1,6 @@
 SELECT 
-    hs.municipality_code,
+    geo.department_code,
+    geo.department_name,
     AVG(hs.nb_principal_home) AS avg_principal_home,
     AVG(hs.nb_second_home) AS avg_second_home,
     AVG(hs.nb_vacants_housing) AS avg_vacants_housing,
@@ -13,8 +14,11 @@ SELECT
     SAFE_DIVIDE(AVG(ppl.population), AVG(hs.nb_tot_housing)) AS ratio_population_to_tot_housing
 
 FROM {{ ref("stg_raw__housing_stock") }} AS hs
-LEFT JOIN {{ ref("stg_raw__population_by_municipality") }} AS ppl 
-USING (municipality_code)
-GROUP BY hs.municipality_code
-
+LEFT JOIN {{ ref("stg_raw__population_by_municipality") }} AS ppl on hs.municipality_code = ppl.municipality_code
+ left join {{ref("stg_raw__geographical_referential") }} as geo on geo.municipality_code = hs.municipality_code
+Where geo.department_code is not null
+GROUP BY     geo.department_code,
+    geo.department_name
+order by geo.department_code,
+    geo.department_name
 
