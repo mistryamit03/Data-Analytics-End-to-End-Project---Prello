@@ -1,14 +1,16 @@
-SELECT
-count(poi) as nb_poi,
-    name_reprocessed,
-    latitude,
-    longitude,
-    municipality_code,
-    importance
-FROM {{ ref("int_tourism") }}
+select
+department_code,
+department_name,
+poi,
+COUNT(poi) as nb_poi,
+AVG(importance) as avg_impportance_per_poi
+
+from  {{ref ('int_tourism')}} as a 
+left join {{ref ('stg_raw__geographical_referential')}} as b 
+on a.municipality_code = b.municipality_code 
+where department_code IS NOT NULL
 GROUP BY 
-    name_reprocessed,
-    latitude,
-    longitude,
-    municipality_code,
-    importance
+department_code,
+department_name,
+poi
+ORDER BY department_code, department_name
