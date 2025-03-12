@@ -42,7 +42,7 @@ growth_cte AS (
         avg_sal_by_dept_code,
         median_salary,
         avg_ratio,
-        (avg_sal_by_dept_code - LAG(avg_sal_by_dept_code) OVER (PARTITION BY department_name, department_code ORDER BY year_date )) / NULLIF(LAG(avg_sal_by_dept_code) OVER (
+        (avg_ratio - LAG(avg_ratio) OVER (PARTITION BY department_name, department_code ORDER BY year_date )) / NULLIF(LAG(avg_ratio) OVER (
         PARTITION BY department_name, department_code ORDER BY year_date ), 0) AS year_growth_ratio
     FROM ratio_cte
 )
