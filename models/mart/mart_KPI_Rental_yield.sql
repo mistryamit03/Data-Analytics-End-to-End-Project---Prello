@@ -9,7 +9,7 @@ WITH rental_prices AS (
 filtered_sales AS (
   SELECT
     municipality_code,
-    sales_amount,
+    sales_price_m_2,
     premise_type
   FROM {{ ref("int_notary_real_estate_sales") }}
   WHERE premise_type IN ('Maison', 'Appartement')
@@ -18,13 +18,13 @@ SELECT
   rp.municipality_code,
   rp.rental_appart,
   rp.rental_house,
-  fs.sales_amount,
+  fs.sales_price_m_2,
   fs.premise_type,
   CASE
-    WHEN fs.premise_type = 'Appartement' THEN (rp.rental_appart * 12 / NULLIF(fs.sales_amount, 0)) * 100
+    WHEN fs.premise_type = 'Appartement' THEN (rp.rental_appart * 12 / NULLIF(fs.sales_price_m_2, 0)) * 100
   END AS yield_rental_appart,
   CASE
-    WHEN fs.premise_type = 'Maison' THEN (rp.rental_house * 12 / NULLIF(fs.sales_amount, 0)) * 100
+    WHEN fs.premise_type = 'Maison' THEN (rp.rental_house * 12 / NULLIF(fs.sales_price_m_2, 0)) * 100
   END AS yield_rental_house
 FROM rental_prices rp
 LEFT JOIN filtered_sales fs
