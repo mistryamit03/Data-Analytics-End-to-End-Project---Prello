@@ -9,6 +9,7 @@ source as (
 renamed as (
 
     select
+        _line,
         sales_date,
         sales_amount,
         street_number,
