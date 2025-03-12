@@ -49,4 +49,5 @@ growth_cte AS (
 
 -- Step 5: Select final results
 SELECT * FROM growth_cte
+where department_code is not null
 ORDER BY department_name, year_date, department_code
