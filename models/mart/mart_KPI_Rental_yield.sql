@@ -2,10 +2,12 @@ WITH rental_prices AS (
   SELECT
     department_code,
     department_name,
+    cast(round(avg(c.population)) as int64) as population,
     AVG((COALESCE(rental_max_apartment, 0) + COALESCE(rental_min_apartment, 0)) / 2) AS rental_appart,
     AVG((COALESCE(rental_med_house, 0) + COALESCE(rental_max_house, 0) + COALESCE(rental_min_house, 0)) / 3) AS rental_house
   FROM {{ ref("stg_raw__real_estate_info_by_municipality") }} as a
   LEFT JOIN {{ ref("stg_raw__geographical_referential") }} as b ON a.municipality_code = b.municipality_code
+  left join {{ref("stg_raw__population_by_municipality")}} as c on a.municipality_code = c.municipality_code
   GROUP BY department_code, department_name
 ),
 filtered_sales AS (
@@ -23,6 +25,7 @@ SELECT
   rp.department_name,
   rp.rental_appart AS appart_rent_per_m2,
   rp.rental_house AS house_rent_per_m2,
+  rp.population,
   fs.sales_price_m_2,
   fs.premise_type,
   CASE
