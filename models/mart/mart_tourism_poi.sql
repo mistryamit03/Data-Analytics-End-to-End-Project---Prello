@@ -4,7 +4,7 @@ department_name,
 a.municipality_code,
 poi,
 COUNT(poi) as nb_poi,
-AVG(importance) as avg_impportance_per_poi
+AVG(importance) as avg_importance_per_poi
 
 from  {{ref ('int_tourism')}} as a 
 left join {{ref ('stg_raw__geographical_referential')}} as b 
