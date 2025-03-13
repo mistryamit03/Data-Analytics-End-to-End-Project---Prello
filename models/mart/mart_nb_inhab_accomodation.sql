@@ -1,6 +1,5 @@
-SELECT 
-    geo.department_code,
-    geo.department_name,
+with x as(SELECT 
+    hs.municipality_code,
     AVG(hs.nb_principal_home) AS avg_principal_home,
     AVG(hs.nb_second_home) AS avg_second_home,
     AVG(hs.nb_vacants_housing) AS avg_vacants_housing,
@@ -15,10 +14,19 @@ SELECT
 
 FROM {{ ref("stg_raw__housing_stock") }} AS hs
 LEFT JOIN {{ ref("stg_raw__population_by_municipality") }} AS ppl on hs.municipality_code = ppl.municipality_code
- left join {{ref("stg_raw__geographical_referential") }} as geo on geo.municipality_code = hs.municipality_code
+GROUP BY     hs.municipality_code)
+
+Select  
+geo.department_code,
+geo.department_name,
+SUM(x.avg_principal_home) as avg_principal_home,
+SUM(x.avg_second_home) as avg_second_home,
+SUM(x.avg_vacants_housing) as avg_vacants_housing,
+SUM(x.avg_tot_housing) AS avg_tot_housing,
+SUM(x.avg_population) AS avg_population
+from x
+left join {{ref("stg_raw__geographical_referential") }} as geo on geo.municipality_code = x.municipality_code
 Where geo.department_code is not null
-GROUP BY     geo.department_code,
-    geo.department_name
-order by geo.department_code,
-    geo.department_name
+group by geo.department_code, geo.department_name
+order by geo.department_code, geo.department_name
 
