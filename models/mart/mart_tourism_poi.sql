@@ -1,6 +1,7 @@
 select
 department_code,
 department_name,
+a.municipality_code,
 poi,
 COUNT(poi) as nb_poi,
 AVG(importance) as avg_impportance_per_poi
@@ -12,5 +13,6 @@ where department_code IS NOT NULL
 GROUP BY 
 department_code,
 department_name,
+a.municipality_code,
 poi
 ORDER BY department_code, department_name
