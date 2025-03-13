@@ -16,4 +16,4 @@ LEFT JOIN {{ ref("stg_raw__population_by_municipality") }} AS ppl on hs.municipa
 left join {{ref("stg_raw__geographical_referential") }} as geo on geo.municipality_code = hs.municipality_code
 Where geo.department_code is not null
 GROUP BY    geo.department_code, geo.department_name, hs.municipality_code
-order by department_code, department_name
+order by department_code, department_name, municipality_code
