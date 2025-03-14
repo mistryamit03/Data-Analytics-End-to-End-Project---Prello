@@ -26,7 +26,7 @@ SELECT
     e.poi,
     e.nb_poi,
     e.avg_importance_per_poi,
-    AVG(f.avg_sales_amount) AS avg_sales_amount_over_time,
+    AVG(f.sum_sales_amount) AS avg_sales_amount_over_time,
     AVG(f.pct_growth_sales_amount) AS pct_growth_sales_amount_over_time,
     AVG(f.avg_total_m2) AS avg_total_m2_over_time,
     AVG(f.pct_growth_total_m2) AS pct_growth_total_m2_over_time,
