@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table'
+) }}
+
+
 With kpi as (
     select
     department_code,
