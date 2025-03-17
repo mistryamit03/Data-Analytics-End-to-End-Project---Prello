@@ -11,6 +11,7 @@ fs as (
    SELECT
     municipality_code,
     sales_price_m_2,
+    surface,
     premise_type
   FROM {{ ref("int_notary_real_estate_sales")}}
   Where sales_price_m_2 != 0 and sales_price_m_2 is not null)
@@ -24,6 +25,7 @@ rp.rental_appart,
 rp.rental_house,
 fs.sales_price_m_2,
 fs.premise_type,
+fs.surface,
   CASE
     WHEN fs.premise_type = 'Appartement' THEN (rp.rental_appart * 12 / fs.sales_price_m_2)
     WHEN fs.premise_type = 'Maison' THEN (rp.rental_house * 12 / fs.sales_price_m_2)
