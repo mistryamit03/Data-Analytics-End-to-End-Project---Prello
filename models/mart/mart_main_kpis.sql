@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table'
+) }}
+
+
 With kpi as (
     select
     department_code,
@@ -109,3 +114,4 @@ left join nb_inhab on kpi.municipality_code = nb_inhab.municipality_code
 left join poi on kpi.municipality_code = poi.municipality_code
 left join yoy_grwth on kpi.municipality_code = yoy_grwth.municipality_code 
 order by department_code, department_name, municipality_code
+
