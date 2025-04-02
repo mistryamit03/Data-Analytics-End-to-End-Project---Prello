@@ -60,4 +60,4 @@ Prello, a **proptech company** specializing in **second home sales and managemen
 ## 🔗 Project Links  
 - **GitHub Repository**: [https://github.com/mistryamit03/Data-Analytics-End-to-End-Project---Prello]  
 - **Live Web App**: [https://prello.streamlit.app/]
-- - **Dashboard Link**: [https://lookerstudio.google.com/u/0/reporting/11b190c0-92ab-4bb6-85d8-97705e8fa026/page/2Eu8E/edit]  
+- **Dashboard Link**: [https://lookerstudio.google.com/u/0/reporting/11b190c0-92ab-4bb6-85d8-97705e8fa026/page/2Eu8E/edit]  
